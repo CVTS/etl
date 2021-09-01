@@ -17,7 +17,7 @@ Create TABLE vehicle_days  (vehicle_id  INTEGER   NOT NULL,
                             min_time    TIMESTAMP NOT NULL,
                             max_time    TIMESTAMP NOT NULL,
                             geom        geometry(Polygon, 4326));
-CREATE INDEX veh_days_brin ON vehicle_days USING BRIN (geom);
+CREATE INDEX veh_days_gist ON vehicle_days USING GIST(geom);
 CREATE INDEX vehicle_days_id_idx ON vehicle_days (vehicle_id);
 CREATE INDEX vehicle_days_day_idx ON vehicle_days (day);
 

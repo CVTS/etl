@@ -48,7 +48,10 @@ def consolidate_vehicle_data(vehicle_id, month, year=2020):
         fl = join(fldr, veh_name)
 
         if isfile(fl):
-            df = pd.read_csv(fl)
+            df = pd.read_csv(fl).dropna()
+            if df.shape[0] == 0:
+                os.unlink(fl)
+                continue
             min_time = datetime.fromtimestamp(df.datetime.values[0])
             max_time = datetime.fromtimestamp(df.datetime.values[-1])
             xmin = df.x.min()
